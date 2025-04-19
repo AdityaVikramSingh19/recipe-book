@@ -2,30 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Recipes.css';
 
-// Dummy data (will later replace with API call)
-const dummyRecipes = [
-  { id: 1, name: 'Spaghetti Bolognese', description: 'A classic Italian dish.' },
-  { id: 2, name: 'Chicken Curry', description: 'A flavorful spicy dish.' },
-  { id: 3, name: 'Veggie Stir Fry', description: 'A healthy vegetable stir fry.' },
-];
-
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Simulating an API call by using dummy data
   useEffect(() => {
-    setRecipes(dummyRecipes);
+    // Fetch data from TheMealDB API
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
+      .then((response) => response.json())
+      .then((data) => {
+        setRecipes(data.meals);  // Set the recipes state with the fetched data
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching recipes:', error);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return <p>Loading recipes...</p>;
+  }
 
   return (
     <div className="recipes-container">
       <h2>All Recipes</h2>
       <div className="recipes-list">
-        {recipes.map((recipe) => (
-          <div key={recipe.id} className="recipe-card">
-            <h3>{recipe.name}</h3>
-            <p>{recipe.description}</p>
-            <Link to={`/recipes/${recipe.id}`} className="recipe-details-link">View Details</Link>
+        {recipes?.map((recipe) => (
+          <div key={recipe.idMeal} className="recipe-card">
+            <h3>{recipe.strMeal}</h3>
+            <p>{recipe.strCategory}</p>
+            <Link to={`/recipes/${recipe.idMeal}`} className="recipe-details-link">
+              View Details
+            </Link>
           </div>
         ))}
       </div>
