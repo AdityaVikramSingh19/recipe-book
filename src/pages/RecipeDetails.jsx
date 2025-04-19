@@ -2,38 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './RecipeDetails.css';
 
-// Dummy data for now, to be replaced with real API call
-const dummyRecipes = [
-  { id: 1, name: 'Spaghetti Bolognese', description: 'A classic Italian dish.', ingredients: ['Spaghetti', 'Tomato sauce', 'Ground beef'], instructions: 'Cook spaghetti and add sauce and beef.' },
-  { id: 2, name: 'Chicken Curry', description: 'A flavorful spicy dish.', ingredients: ['Chicken', 'Curry powder', 'Coconut milk'], instructions: 'Cook chicken and add curry spices and coconut milk.' },
-  { id: 3, name: 'Veggie Stir Fry', description: 'A healthy vegetable stir fry.', ingredients: ['Broccoli', 'Carrots', 'Soy sauce'], instructions: 'Stir-fry veggies with soy sauce.' },
-];
-
 const RecipeDetails = () => {
-  const { id } = useParams();  // Extracting the recipe id from the URL
+  const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const foundRecipe = dummyRecipes.find((recipe) => recipe.id === parseInt(id));
-    setRecipe(foundRecipe);
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setRecipe(data.meals[0]);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching recipe details:', error);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!recipe) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return <p>Loading recipe details...</p>;
   }
 
   return (
     <div className="recipe-details-container">
-      <h2>{recipe.name}</h2>
-      <p>{recipe.description}</p>
+      <h2>{recipe.strMeal}</h2>
+      <p>{recipe.strCategory}</p>
       <h3>Ingredients:</h3>
       <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
+        {Object.keys(recipe)
+          .filter((key) => key.includes('strIngredient') && recipe[key])  // Filter to get ingredients
+          .map((ingredientKey, index) => (
+            <li key={index}>{recipe[ingredientKey]}</li>
+          ))}
       </ul>
       <h3>Instructions:</h3>
-      <p>{recipe.instructions}</p>
+      <p>{recipe.strInstructions}</p>
     </div>
   );
 };
