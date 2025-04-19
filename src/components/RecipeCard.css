@@ -1,0 +1,23 @@
+.recipe-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: #fdfdfd;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .recipe-card h3 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .view-button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    background-color: #4caf50;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+  
