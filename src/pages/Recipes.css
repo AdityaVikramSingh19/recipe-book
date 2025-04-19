@@ -1,0 +1,36 @@
+.recipes-container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .recipes-list {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .recipe-card {
+    background-color: #ff7043;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipe-details-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #e65c2f;
+    border-radius: 5px;
+  }
+  
+  .recipe-details-link:hover {
+    background-color: #ff5722;
+  }
+  
