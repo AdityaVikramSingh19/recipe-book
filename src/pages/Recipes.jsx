@@ -11,7 +11,10 @@ const Recipes = () => {
       {recipes.length === 0 ? (
         <p>No recipes found. Try adding one!</p>
       ) : (
-        recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
+        recipes.map((recipe, index) => (
+            <RecipeCard key={recipe.id || index} recipe={recipe} />
+          ))
+          
       )}
     </div>
   );
