@@ -1,23 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useRecipes } from '../context/RecipeContext';
-import './Recipes.css';
+import RecipeCard from '../components/RecipeCard';
 
 const Recipes = () => {
   const { recipes } = useRecipes();
 
   return (
-    <div className="recipes-container">
+    <div className="recipes-page">
       <h2>All Recipes</h2>
-      <div className="recipes-list">
-        {recipes.map((recipe) => (
-          <div key={recipe.idMeal} className="recipe-card">
-            <h3>{recipe.strMeal}</h3>
-            <p>{recipe.strCategory}</p>
-            <Link to={`/recipes/${recipe.idMeal}`}>View Details</Link>
-          </div>
-        ))}
-      </div>
+      {recipes.length === 0 ? (
+        <p>No recipes found. Try adding one!</p>
+      ) : (
+        recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
+      )}
     </div>
   );
 };
