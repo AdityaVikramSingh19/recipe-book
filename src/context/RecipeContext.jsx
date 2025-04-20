@@ -1,6 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from 'react';
 
-// Create context
 export const RecipeContext = createContext();
 
 export const RecipeProvider = ({ children }) => {
@@ -9,21 +8,18 @@ export const RecipeProvider = ({ children }) => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await fetch(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s="
-      );
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
-      setRecipes(data.meals || []); // fallback to empty array if null
+      setRecipes(data.meals || []);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching recipes:", error);
+      console.error('Error fetching recipes:', error);
       setLoading(false);
     }
   };
 
-  // Function to add a new recipe
   const addRecipe = (newRecipe) => {
-    setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+    setRecipes((prev) => [...prev, newRecipe]);
   };
 
   useEffect(() => {
