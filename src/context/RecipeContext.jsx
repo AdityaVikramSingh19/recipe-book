@@ -1,39 +1,40 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
-const RecipeContext = createContext();
+// Create context
+export const RecipeContext = createContext();
 
 export const RecipeProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Fetch API data only once
-  useEffect(() => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.meals) {
-          setRecipes(data.meals);
-        }
-      });
-  }, []);
-
-  const addRecipe = (newRecipe) => {
-    setRecipes((prevRecipes) => [
-      ...prevRecipes,
-      {
-        idMeal: Date.now().toString(), // temporary ID
-        strMeal: newRecipe.name,
-        strCategory: newRecipe.category,
-        strInstructions: newRecipe.instructions,
-        strIngredient1: newRecipe.ingredients, // simplified
-      },
-    ]);
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/search.php?s="
+      );
+      const data = await response.json();
+      setRecipes(data.meals || []); // fallback to empty array if null
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+      setLoading(false);
+    }
   };
 
+  // Function to add a new recipe
+  const addRecipe = (newRecipe) => {
+    setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
   return (
-    <RecipeContext.Provider value={{ recipes, addRecipe }}>
+    <RecipeContext.Provider value={{ recipes, loading, addRecipe }}>
       {children}
     </RecipeContext.Provider>
   );
 };
 
-export const useRecipes = () => useContext(RecipeContext);
+export default RecipeContext;

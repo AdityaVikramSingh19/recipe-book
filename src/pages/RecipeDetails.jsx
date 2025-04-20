@@ -1,7 +1,14 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useRecipes } from '../context/RecipeContext';
+import { useContext } from "react";
+import { RecipeContext } from "../context/RecipeContext";
+
 import './RecipeDetails.css';
+import { useContext } from "react";
+import { RecipeContext } from "../context/RecipeContext";
+
+const { recipes } = useContext(RecipeContext);
+
 
 const RecipeDetails = () => {
   const { id } = useParams();

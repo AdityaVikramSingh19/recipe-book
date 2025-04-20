@@ -1,98 +1,115 @@
-import React, { useState } from 'react';
-import { useRecipes } from '../context/RecipeContext';
-import './AddRecipe.css';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { RecipeContext } from "../context/RecipeContext";
+import "./AddRecipe.css"; 
 
 const AddRecipe = () => {
-  const { addRecipe } = useRecipes();
+  const { addRecipe } = useContext(RecipeContext);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
-    category: '',
-    ingredients: '',
-    instructions: '',
+    strMeal: "",
+    strCategory: "",
+    strArea: "",
+    strInstructions: "",
+    strMealThumb: "",
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.category.trim()) newErrors.category = 'Category is required';
-    if (!formData.ingredients.trim()) newErrors.ingredients = 'Ingredients are required';
-    if (!formData.instructions.trim()) newErrors.instructions = 'Instructions are required';
+    Object.entries(formData).forEach(([key, value]) => {
+      if (!value.trim()) {
+        newErrors[key] = "This field is required";
+      }
+    });
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      const newRecipe = {
+        idMeal: Date.now().toString(), // mock unique ID
+        ...formData,
+      };
+      addRecipe(newRecipe);
+      navigate("/recipes");
     } else {
-      addRecipe(formData); 
-      alert('Recipe added successfully!');
-      setFormData({
-        name: '',
-        category: '',
-        ingredients: '',
-        instructions: '',
-      });
-      setErrors({});
+      setErrors(validationErrors);
     }
   };
 
   return (
-    <div className="add-recipe-container">
+    <div className="add-recipe">
       <h2>Add a New Recipe</h2>
-      <form onSubmit={handleSubmit} className="add-recipe-form">
+      <form onSubmit={handleSubmit}>
         <label>
           Name:
           <input
             type="text"
-            name="name"
-            placeholder="Enter recipe name"
-            value={formData.name}
+            name="strMeal"
+            value={formData.strMeal}
             onChange={handleChange}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.strMeal && <span className="error">{errors.strMeal}</span>}
         </label>
 
         <label>
           Category:
           <input
             type="text"
-            name="category"
-            placeholder="e.g. Breakfast"
-            value={formData.category}
+            name="strCategory"
+            value={formData.strCategory}
             onChange={handleChange}
           />
-          {errors.category && <span className="error">{errors.category}</span>}
+          {errors.strCategory && <span className="error">{errors.strCategory}</span>}
         </label>
 
         <label>
-          Ingredients (comma-separated):
-          <textarea
-            name="ingredients"
-            placeholder="e.g. Eggs, Milk, Flour"
-            value={formData.ingredients}
+          Area:
+          <input
+            type="text"
+            name="strArea"
+            value={formData.strArea}
             onChange={handleChange}
-          ></textarea>
-          {errors.ingredients && <span className="error">{errors.ingredients}</span>}
+          />
+          {errors.strArea && <span className="error">{errors.strArea}</span>}
         </label>
 
         <label>
           Instructions:
           <textarea
-            name="instructions"
-            placeholder="Step by step instructions"
-            value={formData.instructions}
+            name="strInstructions"
+            value={formData.strInstructions}
             onChange={handleChange}
-          ></textarea>
-          {errors.instructions && <span className="error">{errors.instructions}</span>}
+          />
+          {errors.strInstructions && (
+            <span className="error">{errors.strInstructions}</span>
+          )}
+        </label>
+
+        <label>
+          Image URL:
+          <input
+            type="text"
+            name="strMealThumb"
+            value={formData.strMealThumb}
+            onChange={handleChange}
+          />
+          {errors.strMealThumb && (
+            <span className="error">{errors.strMealThumb}</span>
+          )}
         </label>
 
         <button type="submit">Add Recipe</button>

@@ -1,23 +1,25 @@
-import React from 'react';
-import { useRecipes } from '../context/RecipeContext';
-import RecipeCard from '../components/RecipeCard';
+import React, { useContext } from "react";
+import { RecipeContext } from "../context/RecipeContext";
+import RecipeCard from "../components/RecipeCard";
+import "./Recipes.css";
 
-const Recipes = () => {
-  const { recipes } = useRecipes();
+function Recipes() {
+  const { recipes, loading } = useContext(RecipeContext);
+
+  if (loading) {
+    return <p style={{ textAlign: "center" }}>Loading recipes...</p>;
+  }
 
   return (
-    <div className="recipes-page">
+    <div className="recipes-wrapper">
       <h2>All Recipes</h2>
-      {recipes.length === 0 ? (
-        <p>No recipes found. Try adding one!</p>
-      ) : (
-        recipes.map((recipe, index) => (
-            <RecipeCard key={recipe.id || index} recipe={recipe} />
-          ))
-          
-      )}
+      <div className="recipes-grid">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.idMeal} recipe={recipe} />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default Recipes;
