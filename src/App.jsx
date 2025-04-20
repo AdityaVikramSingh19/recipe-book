@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Recipes from './pages/Recipes.jsx';
 import RecipeDetails from './pages/RecipeDetails';
 import AddRecipe from './pages/AddRecipe';
+import './App.css';
+
 
 function App() {
   return (
