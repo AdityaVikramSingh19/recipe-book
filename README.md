@@ -1,17 +1,105 @@
- HEAD
-# React + Vite
+# 🍽️ Recipe Book App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and responsive web app to view, search, and add recipes using TheMealDB API. Built using **React**, **React Router**, **Context API**, and **Vite**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
 
-## Expanding the ESLint configuration
+- 📄 Multi-page navigation with React Router
+- 📦 Global state management using React Context API
+- 🔍 Search and view detailed recipes
+- ➕ Add your own custom recipes (with form validation)
+- 📱 Fully responsive design (mobile + desktop)
+- 🔃 API integration with [TheMealDB](https://www.themealdb.com/api.php)
+- 📁 Clean and modular folder structure
+- ✅ Good coding practices & meaningful Git commits
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
 
-# recipe-book
-This is a Recipe Book Explore it and find your favorite recipe. 
- df4a5d60a8b428e03f296e384bc641634f17d5d0
+## 🛠️ Tech Stack
+
+- **Frontend**: React (with Vite)
+- **Routing**: React Router DOM
+- **State Management**: React Context API
+- **Version Control**: Git & GitHub
+- **API**: TheMealDB (Free Recipe API)
+- **Deployment**: Vercel
+
+---
+
+## 🚀 Live Demo
+
+🌐 [Live Site](https://createfood.vercel.app/)
+
+---
+
+## 🧑‍💻 Setup Instructions
+
+1. **Clone the repo:**
+
+```bash
+git clone https://github.com/AdityaVikramSingh19/recipe-book.git
+cd recipe-book
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Run the development server:**
+
+```bash
+npm run dev
+```
+
+4. **Build for production:**
+
+```bash
+npm run build
+```
+
+---
+
+## 📂 Folder Structure
+
+```
+recipe-book/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   ├── App.jsx
+│   └── main.jsx
+├── .env (if API key is required)
+├── package.json
+└── README.md
+```
+
+---
+
+## 📸 Screenshots
+
+*(Add screenshots here to showcase your UI and functionality)*
+
+---
+
+## 📬 Feedback & Contributions
+
+Feel free to submit issues or pull requests. Feedback is welcome!
+
+---
+
+## 📅 Submission Info
+
+- **Project Title**: Recipe Book App
+- **GitHub**: [GitHub Repo](https://github.com/AdityaVikramSingh19/recipe-book)
+- **Live Deployment**: [Live Site](https://createfood.vercel.app/)
+
+---
+
+> Made with ❤️ for learning and fun!
