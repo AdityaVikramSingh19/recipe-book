@@ -1,29 +1,33 @@
 .home-container {
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-  
-  .home-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #ff7043;
-  }
-  
-  .home-container p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .cta-button {
-    background-color: #ff7043;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    text-decoration: none;
-    border-radius: 8px;
-  }
-  
-  .cta-button:hover {
-    background-color: #e65c2f;
-  }
-  
+  background: #1a001a;
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-container h1 {
+  color: #d4a4eb;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
+}
+
+.cta-button {
+  background: #d4a4eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background: #c27be6;
+}

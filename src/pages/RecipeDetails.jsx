@@ -1,20 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useContext } from "react";
-import { RecipeContext } from "../context/RecipeContext";
-
+import { RecipeContext } from '../context/RecipeContext';
 import './RecipeDetails.css';
-import { useContext } from "react";
-import { RecipeContext } from "../context/RecipeContext";
-
-const { recipes } = useContext(RecipeContext);
-
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const { recipes } = useRecipes();
+  const { recipes, loading } = useContext(RecipeContext);
 
-  const recipe = recipes.find((r) => r.id === id);
+  if (loading) return <p>Loading...</p>;
+  const recipe = recipes.find((r) => r.idMeal === id);
 
   if (!recipe) {
     return (
@@ -27,11 +21,10 @@ const RecipeDetails = () => {
 
   return (
     <div className="recipe-details">
-      <h2>{recipe.name}</h2>
-      <p><strong>Category:</strong> {recipe.category}</p>
-      <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-      <p><strong>Instructions:</strong></p>
-      <p>{recipe.instructions}</p>
+      <h2>{recipe.strMeal}</h2>
+      <p><strong>Category:</strong> {recipe.strCategory}</p>
+      <p><strong>Area:</strong> {recipe.strArea}</p>
+      <p><strong>Instructions:</strong> {recipe.strInstructions}</p>
       <Link to="/recipes" className="back-btn">Back to Recipes</Link>
     </div>
   );

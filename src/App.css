@@ -1,32 +1,16 @@
-/* Center content on the page */
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f4f4f4; /* Light background color */
   margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0d000d;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Make sure the content doesn't go too wide on larger screens */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 2rem;
-  box-sizing: border-box;
-}
-
-/* Optional: You can also add some padding and margin to other elements */
-h2, h3, p {
-  margin: 10px 0;
-}
-
-/* Styling for forms, cards, and buttons */
-input, textarea, button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+#root {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
-import { RecipeContext } from "../context/RecipeContext";
-import RecipeCard from "../components/RecipeCard";
-import "./Recipes.css";
+import React, { useContext } from 'react';
+import { RecipeContext } from '../context/RecipeContext';
+import RecipeCard from '../components/RecipeCard';
+import './Recipes.css';
 
 function Recipes() {
   const { recipes, loading } = useContext(RecipeContext);
 
-  if (loading) {
-    return <p style={{ textAlign: "center" }}>Loading recipes...</p>;
-  }
+  if (loading) return <p style={{ textAlign: 'center' }}>Loading recipes...</p>;
 
   return (
     <div className="recipes-wrapper">
